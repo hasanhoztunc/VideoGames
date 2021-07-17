@@ -29,13 +29,13 @@ extension HttpRouter {
     var headers: HTTPHeaders? {
         [
             "Content-Type": "application/json",
-            "x-rapidapi-key": "e1577839cbmshb7b56f7ae2df9a1p153b52jsn5a47e57ba05b",
-            "x-rapidapi-host": "rawg-video-games-database.p.rapidapi.com"
+            "x-rapidapi-key": ProcessInfo.processInfo.environment["x-rapidapi-key"] ?? "",
+            "x-rapidapi-host": ProcessInfo.processInfo.environment["x-rapidapi-host"] ?? ""
         ]
     }
     var parameters: Parameters? {
         [
-            "key": "9ae11778380c4699980bfa7fc6ad0c99"
+            "key": ProcessInfo.processInfo.environment["key"] ?? ""
         ]
     }
     
