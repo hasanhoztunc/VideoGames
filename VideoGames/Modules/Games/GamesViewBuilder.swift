@@ -10,7 +10,7 @@ import UIKit
 final class GamesViewBuilder: ViewBuilder {
     
     typealias BuildData = NSNull
-    typealias ViewController = GamesViewController
+    typealias ViewController = UINavigationController
     
     static func build(with buildData: BuildData? = nil) -> ViewController {
         let gamesViewController = GamesViewController.instantiate()
@@ -32,6 +32,6 @@ final class GamesViewBuilder: ViewBuilder {
             return viewModel
         }
         
-        return gamesViewController
+        return UINavigationController(rootViewController: gamesViewController)
     }
 }

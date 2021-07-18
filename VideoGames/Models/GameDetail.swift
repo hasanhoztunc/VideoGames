@@ -7,7 +7,7 @@
 
 import SwiftyJSON
 
-struct GameDetail {
+struct GameDetail: Codable {
     var id: Int
     var name: String
     var rating: Double

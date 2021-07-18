@@ -18,7 +18,7 @@ final class GameViewRouter: GamesRouter {
     
     func routeToGameDetail(with: Int) {
         let gameDetailViewController = GameDetailViewBuilder.build(with: with)
-        gameDetailViewController.presentFullScreen()
-        viewController?.present(gameDetailViewController, animated: true)
+        
+        viewController?.navigationController?.pushViewController(gameDetailViewController, animated: true)
     }
 }

@@ -13,6 +13,12 @@ final class FavoritesViewBuilder: ViewBuilder {
     typealias ViewController = FavoritesViewController
     
     static func build(with buildData: BuildData? = nil) -> ViewController {
-        FavoritesViewController.instantiate()
+        let viewController = FavoritesViewController.instantiate()
+        
+        viewController.viewModelBuilder = {
+            FavoritesViewModel(input: $0)
+        }
+        
+        return viewController
     }
 }

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Game Detail View Controller-->
+        <scene sceneID="WbH-1T-RZp">
+            <objects>
+                <viewController storyboardIdentifier="GameDetailViewController" id="UTS-19-RN8" customClass="GameDetailViewController" customModule="VideoGames" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="1nl-KW-xw4">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" contentViewInsetsToSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Igj-E2-fjS">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <view key="tableHeaderView" contentMode="scaleToFill" id="lz3-AI-0H7">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="301"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dTP-Dd-2hW">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="301"/>
+                                        </imageView>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Ms-LG-3vc">
+                                            <rect key="frame" x="354" y="241" width="40" height="40"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="40" id="eoB-i6-xvh"/>
+                                                <constraint firstAttribute="width" constant="40" id="fRt-DO-vbf"/>
+                                            </constraints>
+                                            <state key="normal" image="hand.thumbsup" catalog="system"/>
+                                        </button>
+                                    </subviews>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <constraints>
+                                        <constraint firstItem="dTP-Dd-2hW" firstAttribute="top" secondItem="lz3-AI-0H7" secondAttribute="top" id="QYe-vf-maD"/>
+                                        <constraint firstItem="dTP-Dd-2hW" firstAttribute="leading" secondItem="lz3-AI-0H7" secondAttribute="leading" id="dSa-LS-Lty"/>
+                                        <constraint firstAttribute="bottom" secondItem="4Ms-LG-3vc" secondAttribute="bottom" constant="20" id="tc2-Ro-JGR"/>
+                                        <constraint firstAttribute="bottom" secondItem="dTP-Dd-2hW" secondAttribute="bottom" id="wSS-yl-sEL"/>
+                                        <constraint firstAttribute="trailing" secondItem="4Ms-LG-3vc" secondAttribute="trailing" constant="20" id="x5A-jp-qle"/>
+                                        <constraint firstAttribute="trailing" secondItem="dTP-Dd-2hW" secondAttribute="trailing" id="yv0-uW-8gP"/>
+                                    </constraints>
+                                </view>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="sz0-pv-jYe"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="Igj-E2-fjS" secondAttribute="bottom" id="C73-Sr-SKS"/>
+                            <constraint firstItem="sz0-pv-jYe" firstAttribute="trailing" secondItem="Igj-E2-fjS" secondAttribute="trailing" id="FDm-NM-p8l"/>
+                            <constraint firstItem="Igj-E2-fjS" firstAttribute="top" secondItem="1nl-KW-xw4" secondAttribute="top" id="akp-o2-SGh"/>
+                            <constraint firstItem="Igj-E2-fjS" firstAttribute="leading" secondItem="sz0-pv-jYe" secondAttribute="leading" id="fLh-OB-tIL"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="favoriteButton" destination="4Ms-LG-3vc" id="Yr2-6a-30p"/>
+                        <outlet property="gameImageView" destination="dTP-Dd-2hW" id="I3q-Rb-jbG"/>
+                        <outlet property="tableView" destination="Igj-E2-fjS" id="7wM-vq-cq8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UXR-zb-yiF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="153.62318840579712" y="49.553571428571423"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="hand.thumbsup" catalog="system" width="128" height="128"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

@@ -17,7 +17,7 @@ struct Game {
     init(from json: JSON) {
         id = json["id"].intValue
         name = json["name"].stringValue
-        ratings = json["ratings"].doubleValue
+        ratings = json["rating"].doubleValue
         released = json["released"].stringValue
         backgroundImage = json["background_image"].url
     }

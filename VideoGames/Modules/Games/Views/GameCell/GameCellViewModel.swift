@@ -29,4 +29,12 @@ struct GameCellViewModel: GameCellViewPresentable {
         released = game.released
         backgroundImage = game.backgroundImage
     }
+    
+    init(from gameDetail: GameDetail) {
+        id = gameDetail.id
+        name = gameDetail.name
+        rating = gameDetail.rating
+        released = gameDetail.released
+        backgroundImage = gameDetail.backgroundImage
+    }
 }

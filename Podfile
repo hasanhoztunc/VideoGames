@@ -12,4 +12,5 @@ target 'VideoGames' do
     pod 'SwiftyJSON', '~> 4.0'
     pod 'SDWebImage', '~> 5.0'
     pod 'RxDataSources', '~> 5.0'
+    pod 'KeychainSwift', '~> 19.0'
 end
