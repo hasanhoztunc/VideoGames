@@ -9,15 +9,15 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
-typealias GamesSection = SectionModel<Int, GameCellViewPresentable>
-
 protocol GamesViewPresentable {
     
     typealias Input = (
-        gameSelected: Observable<GameCellViewPresentable>, ()
+        gameSelected: Observable<GameCellViewPresentable>,
+        search: Driver<String>
     )
     typealias Output = (
-        gameCells: Driver<[GamesSection]>, ()
+        gameCells: Observable<[GamesTableViewModel]>,
+        hideNothingFound: Observable<Bool>
     )
     typealias Dependencies = (service: AppAPI, ())
     typealias ViewModelBuilder = (Input) -> GamesViewPresentable
@@ -42,7 +42,7 @@ final class GamesViewModel: GamesViewPresentable {
     init(input: Input, dependencies: Dependencies) {
         self.input = input
         self.dependencies = dependencies
-        self.output = GamesViewModel.output(state: state)
+        self.output = GamesViewModel.output(input: input, state: state)
         
         process()
     }
@@ -50,17 +50,70 @@ final class GamesViewModel: GamesViewPresentable {
 
 private extension GamesViewModel {
     
-    static func output(state: State) -> Output {
-        let cells = state
+    static func output(input: Input, state: State) -> Output {
+        let searchObservable = input
+            .search
+            .asObservable()
+        
+        let gamesObservable = state
             .games
-            .map({ games -> [GameCellViewPresentable] in
-                games.map({ GameCellViewModel(from: $0) })
+            .asObservable()
+        
+        let cells = Observable
+            .combineLatest(searchObservable, gamesObservable)
+            .map({ search, games -> [GamesTableViewModel] in
+                if !search.isEmpty && search.count > 3 {
+                    guard games.count > 0 else { return [] }
+                    
+                    var cells = [GamesTableViewModel]()
+                    
+                    let items = games
+                        .filter({ $0.name.lowercased().hasPrefix(search.lowercased()) })
+                        .map({ GameCellViewModel(from: $0) })
+                        .map({ GamesSectionItem.gamesItem(usingViewModel: $0) })
+                    
+                    let games = GamesTableViewModel.gamesSection(
+                        title: "",
+                        items: items)
+                    cells.append(games)
+                    
+                    return cells
+                } else {
+                    guard games.count > 0 else { return [] }
+                    let carouselItems = games[...2]
+                    let gameItems = games[2...]
+                    
+                    var cells = [GamesTableViewModel]()
+                    
+                    let carousel = GamesTableViewModel.carouselSection(
+                        title: "",
+                        items: [GamesSectionItem.carouselItem(usingViewModel: carouselItems.map({ CarouselCellViewModel(from: $0) }))]
+                    )
+                    cells.append(carousel)
+                    
+                    let items = gameItems.map({ GameCellViewModel(from: $0) }).map({ GamesSectionItem.gamesItem(usingViewModel: $0) })
+                    let games = GamesTableViewModel.gamesSection(
+                        title: "",
+                        items: items)
+                    cells.append(games)
+                    
+                    return cells
+                }
             })
-            .map({ [GamesSection(model: 0, items: $0)] })
-            .asDriver(onErrorJustReturn: [])
+        
+        let nothingFound = Observable
+            .combineLatest(searchObservable, cells)
+            .map({ search, cells -> Bool in
+                if search.count > 3, cells.first?.items.count == 0 {
+                    return false
+                } else {
+                    return true
+                }
+            })
         
         return (
-            gameCells: cells, ()
+            gameCells: cells,
+            hideNothingFound: nothingFound
         )
     }
     
